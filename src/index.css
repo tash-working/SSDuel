@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+    background-color: #111827;
+  }
+  
+  #file-upload {
+    display: none;
+  }
+  .custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+  }
