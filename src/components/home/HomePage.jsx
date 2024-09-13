@@ -14,7 +14,6 @@ const HomePage = () => {
 
   
 
-
   function generateRandomNumbers(arrayLength) {
     const randomNumbers = [];
     while (randomNumbers.length < 2) {
