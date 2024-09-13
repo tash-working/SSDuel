@@ -155,6 +155,8 @@ const HomePage = () => {
     };
 
   return (
+    
+    <>
     <div className=' w-50 flex justify-between item-center bg-slate-800 px-10 py-10'>
       
       {numbers.map((number, index) => (
@@ -168,11 +170,13 @@ const HomePage = () => {
           <img className='w-60' onClick={changeSidePic} src={users[number].profilePicture} alt={number} />
         </div>
       ))}
-      <div>
-        <Ranking handleData={handleData}></Ranking>
-      </div>
+     
       
     </div>
+    <div>
+        <Ranking handleData={handleData}></Ranking>
+      </div>
+    </>
   );
 };
 
