@@ -170,12 +170,13 @@ const HomePage = () => {
           <img className='w-60' onClick={changeSidePic} src={users[number].profilePicture} alt={number} />
         </div>
       ))}
+       <div>
+        <Ranking handleData={handleData}></Ranking>
+      </div>
      
       
     </div>
-    <div>
-        <Ranking handleData={handleData}></Ranking>
-      </div>
+   
     </>
   );
 };

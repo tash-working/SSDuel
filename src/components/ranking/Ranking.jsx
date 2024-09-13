@@ -22,7 +22,8 @@ const Ranking = ({ handleData }) => {
     };
     useEffect(async () => {
         let array = []
-        fetch('http://localhost:5000/users')
+        // fetch('http://localhost:5000/users')
+        fetch('https://server-08ld.onrender.com/users')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
