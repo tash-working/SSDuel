@@ -18,7 +18,6 @@ function App() {
                 <Route path="/" element={<LoginPage/>} />
                 <Route path="/id" element={<HomePage />} />
         
-        
             </Routes>
         </BrowserRouter>
  
