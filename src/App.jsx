@@ -5,6 +5,7 @@ import Login from './components/login/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './components/home/HomePage';
 import Ranking from './components/ranking/Ranking';
+import LoginPage from './components/loginPage/LoginPage';
 
 function App() {
 
@@ -14,10 +15,10 @@ function App() {
   
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<LoginPage/>} />
                 <Route path="/id" element={<HomePage />} />
-                <Route path="/r" element={<Ranking/>} />
-                
+        
+        
             </Routes>
         </BrowserRouter>
  

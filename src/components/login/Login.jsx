@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import io from "socket.io-client";
+// const socket = io("http://localhost:5000");
+const socket = io("https://server-08ld.onrender.com");
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -7,7 +10,8 @@ function Login() {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
 
-  const saveImage = async () => {
+  const saveImage = async (event) => {
+    event.preventDefault()
     const data = new FormData();
     data.append('file', image);
     data.append('upload_preset', 'myCloud');
@@ -25,22 +29,33 @@ function Login() {
 
       const cloudData = await res.json();
       setUrl(cloudData.url);
+      setImage(null)
+      document.getElementById('username').innerText =''
+      // document.getElementById('password').innerText =''
+    
+      
 
       const userData = {
         userName: username,
-        password: password,
+        password: "password",
         profilePicture: cloudData.url,
         total: 0,
         like: 0
       }
+      socket.emit("send_user", { userData });
+      alert("added picture with name: "+username)
+      setUsername('')
+      setPassword('')
 
-      await fetch('http://localhost:5000/addPic', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+
+      // await fetch('https://server-08ld.onrender.com/addPic', {
+      // await fetch('http://localhost:5000/addUser', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(userData),
+      // });
     
     } catch (error) {
       console.error(error);
@@ -51,10 +66,11 @@ function Login() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="bg-[#2C3A47] p-10 rounded-xl">
-        {/* Username and Password Inputs */}
+    <div className="bg-[#2C3A47] p-10 rounded-xl">
+      <form onSubmit={saveImage}>
+        {/* Username Input */}
         <div className="mb-5">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Name:</label>
           <input
             type="text"
             id="username"
@@ -65,24 +81,12 @@ function Login() {
             required
           />
         </div>
-        <div className="mb-5">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            className="w-full rounded-md border border-gray-300 p-2"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-        </div>
 
         {/* Image Upload Section */}
         <h4>Image Upload</h4>
 
         <div className="input flex justify-center mb-5">
-          <label for="file-upload" className="custom-file-upload">
+          <label htmlFor="file-upload" className="custom-file-upload">
             {image ? (
               <img
                 className="w-72 lg:w-96 rounded-xl"
@@ -107,13 +111,14 @@ function Login() {
 
         {/* Send Button */}
         <div className="">
-          <button className="w-72 lg:w-96 bg-[#FC427B]" onClick={saveImage}>
+          <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
             Send
           </button>
           <Toaster />
         </div>
-      </div>
+      </form>
     </div>
+  </div>
   );
 }
 

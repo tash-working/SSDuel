@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Ranking from '../ranking/Ranking';
+import io from "socket.io-client";
+// const socket = io("http://localhost:5000");
+const socket = io("https://server-08ld.onrender.com");
+
 
 const HomePage = () => {
   const [numbers, setNumbers] = useState([]);
@@ -22,13 +26,19 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch('https://server-08ld.onrender.com/users')
+    // fetch('http://localhost:5000/users')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
 
         setUsers(data);
         generateRandomNumbers(data.length);
+
+        socket.on("receive_newUser", (data) => {
+          // console.log(data);
+          setUsers((users) => [...users, data]);
+        });
       })
       .catch(error => console.error('Error fetching users:', error)); // Handle potential errors
   }, []);
@@ -58,7 +68,12 @@ const HomePage = () => {
 
 
     }
-    fetch(`http://localhost:5000/update`, {
+
+
+    socket.emit("send_like", { data });
+
+    fetch(`https://server-08ld.onrender.com/update`, {
+    // fetch(`http://localhost:5000/update`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -130,6 +145,15 @@ const HomePage = () => {
 
   };
 
+
+    const handleData = (data) => {
+      // Do something with the received data
+      const newUser = [...users]
+      newUser.push(data)
+      setUsers(newUser)
+      // console.log(data);
+    };
+
   return (
     <div className=' w-50 flex justify-between item-center bg-slate-800 px-10 py-10'>
       
@@ -139,13 +163,13 @@ const HomePage = () => {
             className='text-white py-4 px-4 bg-green-600 font-bold w-fit m-4'
             key={index} // Use index for key prop in this case
           >
-            {users[number].userName} like: {users[number].like}
+            {users[number].userName} like: {users[number].like} Rejections: {users[number].total - users[number].like}
           </h1>
           <img className='w-60' onClick={changeSidePic} src={users[number].profilePicture} alt={number} />
         </div>
       ))}
       <div>
-        <Ranking ></Ranking>
+        <Ranking handleData={handleData}></Ranking>
       </div>
       
     </div>
