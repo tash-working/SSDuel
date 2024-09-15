@@ -27,6 +27,9 @@ const HomePage = ({ getData }) => {
 
 
   function generateRandomNumbers(arrayLength, data) {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData._id);
+    
 
 
     const randomNumbers = [];
@@ -34,7 +37,7 @@ const HomePage = ({ getData }) => {
       const randomNumber = Math.floor(Math.random() * arrayLength);
       console.log(data[randomNumber]);
 
-      if (!randomNumbers.includes(randomNumber) && data[randomNumber].profilePicture !== user.profilePicture) {
+      if (!randomNumbers.includes(randomNumber) && data[randomNumber]._id !== userData._id) {
         randomNumbers.push(randomNumber);
       }
     }
@@ -125,7 +128,7 @@ const HomePage = ({ getData }) => {
       let number;
       do {
         number = Math.floor(Math.random() * users.length); // Generate a number between 0 and 5
-      } while (numbers.includes(number) || users[number].profilePicture === user.profilePicture); // Keep generating until the number is not 5
+      } while (numbers.includes(number) || users[number]._id === user._id); // Keep generating until the number is not 5
       return number;
     }
 
