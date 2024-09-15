@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import io from "socket.io-client";
 // const socket = io("http://localhost:5000");
-const socket = io("https://server-08ld.onrender.com");
+// const socket = io("https://server-08ld.onrender.com");
+const socket = io(`${import.meta.env.REACT_APP_SERVER_URL}`);
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -31,19 +32,19 @@ function Login() {
       setUrl(cloudData.url);
       setImage(null)
       document.getElementById('username').innerText =''
-      // document.getElementById('password').innerText =''
+      document.getElementById('password').innerText =''
     
       
 
       const userData = {
         userName: username,
-        password: "password",
+        password: password,
         profilePicture: cloudData.url,
         total: 0,
         like: 0
       }
       socket.emit("send_user", { userData });
-      alert("added picture with name: "+username)
+      alert("you have been signed up: "+username)
       setUsername('')
       setPassword('')
 
@@ -81,6 +82,17 @@ function Login() {
             required
           />
         </div>
+        <div>
+               <label htmlFor="password">Password:</label>
+            <input
+                className='w-full rounded-md border border-gray-300 p-2'
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            /> 
+            </div>
 
         {/* Image Upload Section */}
         <h4>Image Upload</h4>
