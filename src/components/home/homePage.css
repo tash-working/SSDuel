@@ -1,0 +1,12 @@
+@media (max-width: 767px) {
+    .box {
+      display: block;
+    }
+  }
+  
+  /* Large screens */
+  @media (min-width: 768px) {
+    .box {
+      display: flex;
+    }
+  }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import io from "socket.io-client";
 // const socket = io("http://localhost:5000");
 // const socket = io("https://server-08ld.onrender.com");
@@ -31,10 +32,10 @@ function Login() {
       const cloudData = await res.json();
       setUrl(cloudData.url);
       setImage(null)
-      document.getElementById('username').innerText =''
-      document.getElementById('password').innerText =''
-    
-      
+      document.getElementById('username').innerText = ''
+      document.getElementById('password').innerText = ''
+
+
 
       const userData = {
         userName: username,
@@ -44,7 +45,7 @@ function Login() {
         like: 0
       }
       socket.emit("send_user", { userData });
-      alert("you have been signed up: "+username)
+      alert("you have been signed up: " + username)
       setUsername('')
       setPassword('')
 
@@ -57,80 +58,82 @@ function Login() {
       //   },
       //   body: JSON.stringify(userData),
       // });
-    
+
     } catch (error) {
       console.error(error);
       toast.error('An error occurred during upload. Please try again.');
     }
-   
+
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-    <div className="bg-[#2C3A47] p-10 rounded-xl">
-      <form onSubmit={saveImage}>
-        {/* Username Input */}
-        <div className="mb-5">
-          <label htmlFor="username">Name:</label>
-          <input
-            type="text"
-            id="username"
-            className="w-full rounded-md border border-gray-300 p-2"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-        <div>
-               <label htmlFor="password">Password:</label>
+      <div className="bg-[#2C3A47] p-10 rounded-xl">
+        <form onSubmit={saveImage}>
+          {/* Username Input */}
+          <div className="mb-5">
+            <label htmlFor="username">Name:</label>
             <input
-                className='w-full rounded-md border border-gray-300 p-2'
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            /> 
-            </div>
+              type="text"
+              id="username"
+              className="w-full rounded-md border border-gray-300 p-2"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              className='w-full rounded-md border border-gray-300 p-2'
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        {/* Image Upload Section */}
-        <h4>Image Upload</h4>
+          {/* Image Upload Section */}
+          <h4>Image Upload</h4>
 
-        <div className="input flex justify-center mb-5">
-          <label htmlFor="file-upload" className="custom-file-upload">
-            {image ? (
-              <img
-                className="w-72 lg:w-96 rounded-xl"
-                src={URL.createObjectURL(image)}
-                alt="img"
-              />
-            ) : (
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/1665/1665680.png"
-                className="h-20 w-20"
-                alt="Image placeholder"
-              />
-            )}
-          </label>
-          <input
-            id="file-upload"
-            className="text-white"
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
+          <div className="input flex justify-center mb-5">
+            <label htmlFor="file-upload" className="custom-file-upload">
+              {image ? (
+                <img
+                  className="w-72 lg:w-96 rounded-xl"
+                  src={URL.createObjectURL(image)}
+                  alt="img"
+                />
+              ) : (
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1665/1665680.png"
+                  className="h-20 w-20"
+                  alt="Image placeholder"
+                />
+              )}
+            </label>
+            <input
+              id="file-upload"
+              className="text-white"
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
 
-        {/* Send Button */}
-        <div className="">
-          <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
-            Send
-          </button>
-          <Toaster />
-        </div>
-      </form>
+          {/* Send Button */}
+          <div className="">
+            <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
+              Sign Up
+            </button>
+            <Toaster />
+          </div>
+        </form>
+        
+
+      </div>
     </div>
-  </div>
   );
 }
 

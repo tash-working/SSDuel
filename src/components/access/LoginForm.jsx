@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function LoginForm({handleData}) {
     const [username, setUsername] = useState('');
@@ -74,6 +75,7 @@ function LoginForm({handleData}) {
             
             <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">Submit</button>
         </form>
+       
         </div>
       </div>
         

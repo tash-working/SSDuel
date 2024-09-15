@@ -7,6 +7,7 @@ import HomePage from './components/home/HomePage';
 import Ranking from './components/ranking/Ranking';
 import LoginPage from './components/loginPage/LoginPage';
 import Profile from './components/profile/Profile';
+import LoginForm from './components/access/LoginForm';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
               
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/ranking" element={<Ranking/>} />
+               
         
             </Routes>
         </BrowserRouter>

@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Ranking from '../ranking/Ranking';
 import io from "socket.io-client";
 import Navbar from '../navbar/Navbar';
+import HomeNav from '../navbar/HomeNav';
+import "./homePage.css"
 // const socket = io("http://localhost:5000");
 // const socket = io("https://server-08ld.onrender.com");
 const socket = io(import.meta.env.REACT_APP_SERVER_URL);
 
-const HomePage = ({ isLogged, user }) => {
+const HomePage = ({ getData }) => {
+  const [user, setUser] = useState({});
+
 
 
 
@@ -40,16 +44,18 @@ const HomePage = ({ isLogged, user }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const userData = JSON.parse(localStorage.getItem("user"));
+      setUser(userData)
       try {
         const response = await fetch(`${import.meta.env.REACT_APP_SERVER_URL}/users`);
         if (!response.ok) {
           throw new Error(`Network response was not ok (status ${response.status})`);
         }
         const data = await response.json();
-  
+
         setUsers(data);
         generateRandomNumbers(data.length, data);
-  
+
         socket.on("receive_newUser", (newUser) => {
           // console.log(newUser);
           setUsers((users) => [...users, newUser]);
@@ -58,7 +64,7 @@ const HomePage = ({ isLogged, user }) => {
         console.error('Error fetching users:', error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -171,37 +177,46 @@ const HomePage = ({ isLogged, user }) => {
     setUsers(newUser)
     // console.log(data);
   };
+  const logout = () => {
+
+    getData()
+
+  }
 
   return (
 
     <>
-    <Navbar></Navbar>
-      <div className=' w-50 flex justify-between item-center bg-slate-800 px-10 py-10'>
+      <HomeNav getdata={logout}></HomeNav>
+      <div>
+        <div id='box' className=' w-50 flex justify-between item-center bg-slate-800 px-10 py-10'>
 
-        {numbers.map((number, index) => (
-          
-          <div key={index} className="text-white py-4 px-4 bg-white font-bold">
-          <h1
-            key={index} // Use index for key prop in this case
-            className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
-          >
-            {users[number].userName} ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
-          </h1>
-        
-          <img
-            className="w-60 rounded-md object-cover" // Added rounded corners and object-cover for better image scaling
-            onClick={changeSidePic}
-            src={users[number].profilePicture}
-            alt={number}
-          />
-        </div>
-        ))}
-        <div>
-          <Ranking handleData={handleData} isLogged={isLogged}></Ranking>
-        </div>
+          {numbers.map((number, index) => (
 
+            <div key={index} className="text-white py-4 px-4 bg-white font-bold">
+              <h1
+                key={index} // Use index for key prop in this case
+                className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
+              >
+                {users[number].userName} ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
+              </h1>
+
+              <img
+                className="w-60 rounded-md object-cover" // Added rounded corners and object-cover for better image scaling
+                onClick={changeSidePic}
+                src={users[number].profilePicture}
+                alt={number}
+              />
+            </div>
+          ))}
+          <div>
+            <Ranking handleData={handleData} ></Ranking>
+          </div>
+
+
+        </div>
 
       </div>
+
 
     </>
   );
