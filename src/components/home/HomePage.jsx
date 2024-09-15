@@ -60,7 +60,7 @@ const HomePage = ({ isLogged, user }) => {
     };
   
     fetchData();
-  }, [socket]);
+  }, []);
 
 
   function getUsersByPositions(point) {
@@ -180,13 +180,16 @@ const HomePage = ({ isLogged, user }) => {
 
         {numbers.map((number, index) => (
           
-          <div key={index} className="flex flex-col items-center justify-center py-4 px-4 bg-white font-bold">
-          <h1 className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md">
-            {users[number].userName} ❤️ {users[number].like} 🗑️ {users[number].total - users[number].like}
+          <div key={index} className="text-white py-4 px-4 bg-white font-bold">
+          <h1
+            key={index} // Use index for key prop in this case
+            className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
+          >
+            {users[number].userName} ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
           </h1>
         
           <img
-            className="w-[200px] rounded-md object-cover"
+            className="w-60 rounded-md object-cover" // Added rounded corners and object-cover for better image scaling
             onClick={changeSidePic}
             src={users[number].profilePicture}
             alt={number}

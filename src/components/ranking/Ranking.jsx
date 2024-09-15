@@ -3,7 +3,7 @@ import io from "socket.io-client";
 // const socket = io("http://localhost:5000");
 // const socket = io("https://server-08ld.onrender.com");
 const socket = io(`${import.meta.env.REACT_APP_SERVER_URL}`);
-const Ranking = ({ handleData, isLogged }) => {
+const Ranking = ({handleData}) => {
 
 
     const data = "Hello from child";
@@ -18,74 +18,75 @@ const Ranking = ({ handleData, isLogged }) => {
 
     }
 
-    const fetchData = () => {
-        let array = []
-
-        fetch(`${import.meta.env.REACT_APP_SERVER_URL}/users`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-
-                groupAndSortObjects(data);
-                array = data
-
-                socket.on("receive_newUser", (data) => {
-                    console.log(data);
-                    setUsers((users) => [...users, data]);
-                    array.push(data)
-                });
-
-
-
-                socket.on("like_success", (data) => {
-                    console.log(data.filteredUpdateDocs);
-                    const docs = data.filteredUpdateDocs
-                    for (let i = 0; i < docs.length; i++) {
-                        const element = docs[i];
-                        //    const update = 
-                        const newTotal = element.updateOne.update.$set.total
-                        const newLike = element.updateOne.update.$set.like
-
-                        console.log(newTotal, newLike);
-
-
-                        const targetId = element.updateOne.filter._id; // Replace with the actual ID you want to find
-                        const pastUSers = [...users]
-
-                        const foundObject = array.find(obj => obj._id === targetId);
-
-                        if (foundObject) {
-                            // Update the found object (adjust the update logic as needed)
-                            foundObject.total = newTotal;
-                            foundObject.like = newLike;
-
-
-                            // Replace the object in the array at the same index
-                            const index = array.indexOf(foundObject);
-                            array[index] = foundObject;
-                            console.log(array);
-                            //   groupAndSortObjects(array)
-                            loging(array)
-
-                        } else {
-                            console.log("Object with ID", targetId, "not found");
-                        }
-
-
-
-
-
-                    }
-
-                });
-
-
-
-            })
-            .catch(error => console.error('Error fetching users:', error)); // Handle potential errors
-
-    }
+   
     useEffect(() => {
+        const fetchData = () => {
+            let array = []
+    
+            fetch(`${import.meta.env.REACT_APP_SERVER_URL}/users`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+    
+                    groupAndSortObjects(data);
+                    array = data
+    
+                    socket.on("receive_newUser", (data) => {
+                        console.log(data);
+                        setUsers((users) => [...users, data]);
+                        array.push(data)
+                    });
+    
+    
+    
+                    socket.on("like_success", (data) => {
+                        console.log(data.filteredUpdateDocs);
+                        const docs = data.filteredUpdateDocs
+                        for (let i = 0; i < docs.length; i++) {
+                            const element = docs[i];
+                            //    const update = 
+                            const newTotal = element.updateOne.update.$set.total
+                            const newLike = element.updateOne.update.$set.like
+    
+                            console.log(newTotal, newLike);
+    
+    
+                            const targetId = element.updateOne.filter._id; // Replace with the actual ID you want to find
+                            const pastUSers = [...users]
+    
+                            const foundObject = array.find(obj => obj._id === targetId);
+    
+                            if (foundObject) {
+                                // Update the found object (adjust the update logic as needed)
+                                foundObject.total = newTotal;
+                                foundObject.like = newLike;
+    
+    
+                                // Replace the object in the array at the same index
+                                const index = array.indexOf(foundObject);
+                                array[index] = foundObject;
+                                console.log(array);
+                                //   groupAndSortObjects(array)
+                                loging(array)
+    
+                            } else {
+                                console.log("Object with ID", targetId, "not found");
+                            }
+    
+    
+    
+    
+    
+                        }
+    
+                    });
+    
+    
+    
+                })
+                .catch(error => console.error('Error fetching users:', error)); // Handle potential errors
+    
+        }
 
 
 
