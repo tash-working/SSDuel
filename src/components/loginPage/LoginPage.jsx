@@ -7,11 +7,11 @@ const LoginPage = () => {
     // const name = localStorage.getItem("name");
     const [isSigned, setIsSigned] = useState(false);
     const check = JSON.parse(localStorage.getItem("isLogged"));
-    const userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
+    
+
     console.log(check);
     const [isLogged, setIsLogged] = useState(check);
-    const [user, setUser] = useState(userData);
+  
     const handleData = (data) => {
         // Do something with the received data
         setIsLogged(data)
@@ -26,6 +26,16 @@ const LoginPage = () => {
             console.log("loggedin");
 
         } else if (isLogged == false || isLogged == null) {
+            localStorage.setItem('user', JSON.stringify(
+                {
+                    "_id": "",
+                    "userName": "",
+                    "password": "",
+                    "profilePicture": "",
+                    "total": 0,
+                    "like": 0
+                  }
+            ));
             document.getElementById("home").style.display = "none";
             document.getElementById("login").style.display = "block";
             console.log("not loggedin");
@@ -36,7 +46,7 @@ const LoginPage = () => {
         console.log("lohout");
         document.getElementById("home").style.display = "none";
         document.getElementById("login").style.display = "block";
-        localStorage.setItem('user', JSON.stringify({}));
+        // localStorage.setItem('user', JSON.stringify({}));
         localStorage.setItem('isLogged', JSON.stringify(false));
         setIsLogged(false)
         

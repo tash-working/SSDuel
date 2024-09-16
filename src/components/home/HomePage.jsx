@@ -28,7 +28,7 @@ const HomePage = ({ getData }) => {
 
   function generateRandomNumbers(arrayLength, data) {
     const userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData._id);
+    // console.log(userData._id);
     
 
 
