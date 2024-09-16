@@ -20,14 +20,14 @@ function LoginForm({handleData}) {
                     console.log(data.item);
                     localStorage.setItem('user', JSON.stringify(data.item));
                     localStorage.setItem('isLogged', data.permission);
-                    handleData(data.permission)
+                    handleData(data.permission, data.filteredUsers)
 
                    
 
 
                     
                 }else{
-                    alert("inc")
+                    alert("incorect user name or password ")
                     
                 }
     

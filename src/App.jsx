@@ -21,6 +21,7 @@ function App() {
               
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/ranking" element={<Ranking/>} />
+                <Route path="/hotornot" element={<HomePage/>} />
                
         
             </Routes>

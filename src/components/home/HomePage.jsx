@@ -189,7 +189,7 @@ const HomePage = ({ getData }) => {
   return (
 
     <>
-      <HomeNav getdata={logout}></HomeNav>
+      <Navbar></Navbar>
       <div>
         <div id='box' className=' w-50 flex justify-between item-center bg-slate-800 px-10 py-10'>
 

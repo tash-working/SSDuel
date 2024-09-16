@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Login from '../login/Login';
 import HomePage from '../home/HomePage';
 import LoginForm from '../access/LoginForm';
+import Feed from '../feed/Feed';
 
 const LoginPage = () => {
     // const name = localStorage.getItem("name");
@@ -88,7 +89,8 @@ const LoginPage = () => {
             </div>
 
             <div id='home'>
-                <HomePage getData={homeLogOut}></HomePage>
+                {/* <HomePage getData={homeLogOut}></HomePage> */}
+                <Feed  getData={homeLogOut}></Feed>
             </div>
 
 
