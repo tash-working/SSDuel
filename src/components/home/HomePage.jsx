@@ -99,12 +99,12 @@ const HomePage = ({ getData }) => {
     socket.emit("send_like", { data });
 
     // fetch(`https://server-08ld.onrender.com/update`, {
-    fetch(`${import.meta.env.REACT_APP_SERVER_URL}/users`, {
-      // fetch(`http://localhost:5000/update`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
+    // fetch(`${import.meta.env.REACT_APP_SERVER_URL}/users`, {
+    //   // fetch(`http://localhost:5000/update`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data),
+    // });
 
 
 
