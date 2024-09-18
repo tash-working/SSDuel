@@ -96,9 +96,7 @@ const Profile = () => {
       <Navbar></Navbar>
       <div>
         <h1 className="m-5 p-2 text-slate-100 font-bold">
-          <span className="underline">
-            Profile Page
-          </span>
+          <span className="underline">Profile Page</span>
         </h1>
       </div>
       <div className="flex items-center flex-wrap space-x-1 p-4 m-3 border-indigo-500/100">
@@ -142,13 +140,13 @@ const Profile = () => {
       <div className="flex justify-center items-center">
         <div className="text-center">
           <form
-            className={`w-[300px] text-center bg-gray ${
+            className={`w-[300px] text-center ${
               showElement ? "block" : "hidden"
             }`}
             id="uploadId"
             onSubmit={saveImage}
           >
-            <div className="flex bg-gray-800 justify-center mt-2">
+            <div className="flex justify-center m-2">
               {" "}
               <label htmlFor="file-upload" className="custom-file-upload">
                 {image ? (
