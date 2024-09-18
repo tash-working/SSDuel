@@ -78,7 +78,7 @@ const Profile = () => {
                     });
 
 
-
+                    setTitle("")
                     console.log('Image uploaded and user data updated successfully!'); // Success message
                 } catch (serverError) {
                     console.error('Error updating user data:', serverError);
