@@ -34,7 +34,8 @@ const LoginPage = () => {
                     "password": "",
                     "profilePicture": "",
                     "total": 0,
-                    "like": 0
+                    "like": 0,
+                    "url": []
                   }
             ));
             document.getElementById("home").style.display = "none";

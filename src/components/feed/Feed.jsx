@@ -10,9 +10,9 @@ const Feed = ({ getData }) => {
       }
     return (
         <div>
-          
-          <HomeNav getdata={logout}></HomeNav>
-          <div className="h-screen w-full  flex justify-center items-center">
+           <HomeNav getdata={logout}></HomeNav>
+         <div>
+             <div className="h-screen w-full  flex justify-center items-center">
                 <div className='text-center'>
                     <h1 className="text-white text-4xl font-bold">This section is under construction</h1>
                    
@@ -20,6 +20,9 @@ const Feed = ({ getData }) => {
                 </div>
             </div>
         </div>
+        
+         </div>
+         
     );
 };
 

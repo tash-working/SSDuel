@@ -16,6 +16,7 @@ const HomePage = ({ getData }) => {
 
 
 
+ 
   const [numbers, setNumbers] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -200,7 +201,7 @@ const HomePage = ({ getData }) => {
                 key={index} // Use index for key prop in this case
                 className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
               >
-                {users[number].userName} ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
+                <samp className=" text-xl font-bold text-white-400">{users[number].userName}</samp> <br /> ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
               </h1>
 
               <img

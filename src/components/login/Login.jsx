@@ -42,7 +42,8 @@ function Login() {
         password: password,
         profilePicture: cloudData.url,
         total: 0,
-        like: 0
+        like: 0,
+        url: []
       }
       socket.emit("send_user", { userData });
       alert("you have been signed up: " + username)
