@@ -181,7 +181,7 @@ const Ranking = ({ handleData }) => {
 
   return (
     <div
-      className="ranking-container-900 p-2 h-[500px] overflow-y-auto w-full"
+      className="ranking-container-900 p-2 h-[500px] overflow-y-auto w-full" 
       style={{
         width: window.innerWidth < 400 ? "200px" : "400px",
       }}
