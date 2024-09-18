@@ -196,10 +196,10 @@ const HomePage = ({ getData }) => {
 
           {numbers.map((number, index) => (
 
-            <div key={index} className="text-white py-4 px-4 bg-white font-bold">
+            <div key={index} className="text-white py-4 px-4 bg-[#111827] font-bold">
               <h1
                 key={index} // Use index for key prop in this case
-                className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
+                className="text-white py-2 600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
               >
                 <samp className=" text-xl font-bold text-white-400">{users[number].userName}</samp> <br /> ❤️{users[number].like} 🗑️{users[number].total - users[number].like}
               </h1>

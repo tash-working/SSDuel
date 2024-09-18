@@ -96,27 +96,37 @@ const Profile = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="flex items-center space-x-2 p-3 bg-green-600">
+            <div className="flex items-center space-x-1 p-3 bg-[#111827]">
                 <img
                     src={user.profilePicture}
                     alt={user._id}
                     className="w-[200px] h-[200px] rounded-full object-cover"
                 />
-                <h2 className="text-lg font-semibold">{user.userName}</h2>
+                <h2 className="p-2 bg-white text-lg font-semibold">{user.userName}</h2>
             </div>
 
             <div className={`flex justify-between items-center bg-slate-800 px-10 py-10 ${showElement ? 'hidden' : 'block'}`}>
                 {pics.map((picObject, index) => (
-                    <div key={index} className="text-white py-4 px-4 bg-white font-bold rounded-md">
-                        <h1 className="text-white py-4 px-4 bg-green-600 font-bold w-fit m-4 rounded-lg">
-                        {picObject.title}
-                        </h1>
+                  <div key={index}>
+                    <div className="text-white bg-[#111827] font-bold rounded-[5px]">
+                        
                         <img
                             className="w-60 rounded-md object-cover"
                             src={picObject.link}
                             alt={index}
                         />
+                        <div className='flex'>
+                        <h1 className="text-white font-bold my-4 mx-1">
+                        {picObject.title}
+                        </h1>
+                        </div>
+                        
                     </div>
+                    <div>
+                    <h1 className="text-white font-bold  m-1">❤️{0}</h1>
+                </div>
+                  </div>
+
                 ))}
             </div>
             <div className='flex justify-center items-center'>

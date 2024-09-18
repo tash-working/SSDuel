@@ -231,8 +231,8 @@ const Ranking = ({handleData}) => {
 
 
     return (
-        <div className="ranking-container bg-green-900 p-2 h-[500px] overflow-y-auto">
-        <h1 className="text-center text-white text-2xl font-semibold bg-green-500 p-2">ranking:</h1>
+        <div className="ranking-container 900 p-2 h-[500px] overflow-y-auto">
+        <h1 className="text-center text-white text-2xl font-semibold 500 p-2">ranking:</h1>
   <div className="flex-grow overflow-y-auto">
     {users.map((user, index) => (
       <div key={index} className="bg-white p-2 rounded-lg my-2 shadow-md">
