@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import Navbar from "../navbar/Navbar";
 import HomeNav from "../navbar/HomeNav";
 import "./homePage.css";
+import { Link } from "react-router-dom";
 // const socket = io("http://localhost:5000");
 // const socket = io("https://server-08ld.onrender.com");
 const socket = io(import.meta.env.REACT_APP_SERVER_URL);
@@ -167,9 +168,9 @@ const HomePage = ({ getData }) => {
                 key={index} // Use index for key prop in this case
                 className="text-white py-2 600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
               >
-                <samp className=" text-xl font-bold text-white-400 mb-5">
+                <Link to ={`/${users[number]._id}`}><samp className=" text-xl font-bold text-white-400 mb-5">
                   {users[number].userName}
-                </samp>{" "}
+                </samp></Link>{" "}
                 <br /> ❤️{users[number].like} 🗑️
                 {users[number].total - users[number].like}
               </h1>
