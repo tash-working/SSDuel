@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import io from "socket.io-client";
 // const socket = io("http://localhost:5000");
 // const socket = io("https://server-08ld.onrender.com");
@@ -191,10 +192,11 @@ const Ranking = ({ handleData }) => {
       </h1>
       <div className="flex-grow overflow-y-auto">
         {users.map((user, index) => (
-          <div key={index} className="bg-white p-2 rounded-lg my-2 shadow-md">
+          <Link to={`/${user._id}`}>
+             <div key={index} className="bg-white p-2 rounded-lg my-2 shadow-md">
             <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between">
               <h2 key={index} className="text-lg font-medium mr-2">
-                {index + 1}:{user.userName}
+                {index + 1}: {user.userName}
               </h2>
               <h3 className="text-green-500 font-semibold sm:ml-auto">
                 {user.like}-Likes
@@ -207,6 +209,9 @@ const Ranking = ({ handleData }) => {
               </h3>
             </div>
           </div>
+
+          </Link>
+         
         ))}
       </div>
     </div>

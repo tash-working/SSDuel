@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomeNav = ({ getdata }) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const id = user._id
     return (
         <nav className="bg-magenta-800 p-4">
             <div className="flex justify-center">
@@ -13,7 +15,7 @@ const HomeNav = ({ getdata }) => {
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                         Hot/Not
                     </Link>
-                    <Link to="/profile"
+                    <Link to={`/${id}`}  
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                         Profile
                     </Link>

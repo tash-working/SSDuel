@@ -5,7 +5,7 @@ import addition from "./addition.png";
 import folder from "./folder.png";
 import UserPost from "../userPost/UserPost";
 
-const Profile = ({id}) => {
+const OthersProfile = ({id}) => {
   const uid = id
   console.log("uid:"+uid);
   
@@ -137,77 +137,9 @@ const Profile = ({id}) => {
          <UserPost key={index} index={index} picObject={picObject}></UserPost>
         ))}
       </div>
-      <div className = "flex justify-center items-center">
-        <div className="text-center">
-          <form
-            className={`w-[300px] text-center ${
-              showElement ? "block" : "hidden"
-            }`}
-            id="uploadId"
-            onSubmit={saveImage}
-          >
-            <div className="flex justify-center m-2">
-              {" "}
-              <label htmlFor="file-upload" className="custom-file-upload">
-                {image ? (
-                  <img
-                    className="w-72 lg:w-96 rounded-xl"
-                    src={URL.createObjectURL(image)}
-                    alt="img"
-                  />
-                ) : (
-                  <img
-                    src={addIcon}
-                    className="opacity-50 h-72 w-72"
-                    alt="Image placeholder"
-                  />
-                )}
-              </label>
-              <input
-                id="file-upload"
-                className="text-white hidden"
-                type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </div>
-            <div>
-              {/* <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                                Title:
-                            </label> */}
-              <input
-                type="text"
-                placeholder="Title"
-                id="title"
-                className="font-bold w-full  border border-gray-300 px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </div>
-            <div className="bg-gray-800 text-center p-4">
-              <button className="w-[100px] h-[50px] bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
-                Send
-              </button>
-            </div>
-          </form>
-
-          <div className="text-center p-3">
-            <button
-              onClick={() => setShowElement(!showElement)}
-              className="bg-[#002f94] hover:text-white px-3 py-1 rounded-md text-sm font-medium text-white"
-              type="button"
-            >
-              {showElement ? (
-                <img className="w-[25px]" src={folder} alt="folder" />
-              ) : (
-                <img className="w-[25px]" src={addition} alt="addition" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+    
     </div>
   );
 };
 
-export default Profile;
+export default OthersProfile;
