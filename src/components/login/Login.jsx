@@ -12,8 +12,11 @@ function Login() {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
 
+  
+
   const saveImage = async (event) => {
     event.preventDefault()
+    document.getElementById('submitBTN').disabled = true;
     const data = new FormData();
     data.append('file', image);
     data.append('upload_preset', 'myCloud');
@@ -46,7 +49,9 @@ function Login() {
         url: []
       }
       socket.emit("send_user", { userData });
+
       alert("you have been signed up: " + username)
+      document.getElementById('submitBTN').disabled = false;
       setUsername('')
       setPassword('')
 
@@ -125,7 +130,7 @@ function Login() {
 
           {/* Send Button */}
           <div className="">
-            <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
+            <button id='submitBTN'  className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
               Sign Up
             </button>
             <Toaster />
