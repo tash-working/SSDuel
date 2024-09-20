@@ -11,6 +11,7 @@ const socket = io(import.meta.env.REACT_APP_SERVER_URL);
 
 const HomePage = ({ getData }) => {
   const [user, setUser] = useState({});
+  const [isLogged, setIsLogged] = useState(false);
 
   const [numbers, setNumbers] = useState([]);
   const [users, setUsers] = useState([]);
@@ -39,6 +40,8 @@ const HomePage = ({ getData }) => {
   useEffect(() => {
     const fetchData = async () => {
       const userData = JSON.parse(localStorage.getItem("user"));
+      const isLogged = JSON.parse(localStorage.getItem("isLogged"));
+      setIsLogged(isLogged)
       setUser(userData);
       try {
         const response = await fetch(
@@ -158,31 +161,42 @@ const HomePage = ({ getData }) => {
           id="box"
           className="flex flex-wrap justify-center sm:justify-center gap-10 bg-slate-800 px-10 py-10  border"
         >
-          
-          {numbers.map((number, index) => (
-            <div
-              key={index}
-              className="text-white p-4 bg-[#111827] font-bold w-full sm:w-[400px] h-auto mb-10 border"
-            >
-              <h1
-                key={index} // Use index for key prop in this case
-                className="text-white py-2 600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
+          {isLogged?(
+             <>
+             {numbers.map((number, index) => (
+              <div
+                key={index}
+                className="text-white p-4 bg-[#111827] font-bold w-full sm:w-[400px] h-auto mb-10 border"
               >
-                <Link to ={`/${users[number]._id}`}><samp className=" text-xl font-bold text-white-400 mb-5">
-                  {users[number].userName}
-                </samp></Link>{" "}
-                <br /> ❤️{users[number].like} 🗑️
-                {users[number].total - users[number].like}
-              </h1>
+                <h1
+                  key={index} // Use index for key prop in this case
+                  className="text-white py-2 600 font-bold w-fit m-4 rounded-md" // Added rounded corners and adjusted padding
+                >
+                  <Link to ={`/${users[number]._id}`}><samp className=" text-xl font-bold text-white-400 mb-5">
+                    {users[number].userName}
+                  </samp></Link>{" "}
+                  <br /> ❤️{users[number].like} 🗑️
+                  {users[number].total - users[number].like}
+                </h1>
+  
+                <img
+                  className="w-full max-w-full h-auto rounded-md object-cover object-top" // Added max-width and object-cover for better image scaling
+                  onClick={changeSidePic}
+                  src={users[number].profilePicture}
+                  alt={number}
+                />
+              </div>
+            ))}
+             </>
 
-              <img
-                className="w-full max-w-full h-auto rounded-md object-cover object-top" // Added max-width and object-cover for better image scaling
-                onClick={changeSidePic}
-                src={users[number].profilePicture}
-                alt={number}
-              />
-            </div>
-          ))}
+          ):(
+            <>
+            <h1 className="bg-white p-5 text-center">You need to login First To Vote</h1>
+            </>
+          )
+
+          }
+         
           <div>
             <Ranking handleData={handleData}></Ranking>
           </div>
