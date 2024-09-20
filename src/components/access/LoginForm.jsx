@@ -49,7 +49,7 @@ function LoginForm({handleData}) {
     return (
         <div className="flex justify-center items-center h-screen">
         <div className="bg-[#2C3A47] p-10 rounded-xl">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='text-center'>
             <label htmlFor="username">Username:</label>
             <input
                 className='w-full rounded-md border border-gray-300 p-2' type="text"
@@ -73,7 +73,7 @@ function LoginForm({handleData}) {
             
             <br />
             
-            <button className="w-72 lg:w-96 bg-[#FC427B]" type="submit">Submit</button>
+            <button className="p-4 h-[50px] w-[100px] bg-[#FC427B] text-white" type="submit">Submit</button>
         </form>
        
         </div>

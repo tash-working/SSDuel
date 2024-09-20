@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import io from "socket.io-client";
@@ -11,8 +11,35 @@ function Login() {
   const [password, setPassword] = useState('');
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
+  const getMsg = () => {
+    socket.on("newUser_msg", (data) => {
+      if (data.isSigned) {
+        alert(data.msg)
 
-  
+        setImage(null)
+        document.getElementById('username').placeholder = ''
+        document.getElementById('username').innerText = ''
+        document.getElementById('password').innerText = ''
+        setUsername('')
+        setPassword('')
+        document.getElementById('submitBTN').disabled = false;
+
+
+      }
+      else {
+        alert(data.msg)
+        setUsername('')
+        document.getElementById('username').placeholder = '*Use another username'
+        
+        document.getElementById('submitBTN').disabled = false;
+      }
+
+    })
+  }
+
+  useEffect(() => {
+    getMsg()
+  }, [])
 
   const saveImage = async (event) => {
     event.preventDefault()
@@ -34,9 +61,9 @@ function Login() {
 
       const cloudData = await res.json();
       setUrl(cloudData.url);
-      setImage(null)
-      document.getElementById('username').innerText = ''
-      document.getElementById('password').innerText = ''
+      // setImage(null)
+      // document.getElementById('username').innerText = ''
+      // document.getElementById('password').innerText = ''
 
 
 
@@ -50,10 +77,9 @@ function Login() {
       }
       socket.emit("send_user", { userData });
 
-      alert("you have been signed up: " + username)
-      document.getElementById('submitBTN').disabled = false;
-      setUsername('')
-      setPassword('')
+
+
+
 
 
       // await fetch('https://server-08ld.onrender.com/addPic', {
@@ -129,14 +155,14 @@ function Login() {
           </div>
 
           {/* Send Button */}
-          <div className="">
-            <button id='submitBTN'  className="w-72 lg:w-96 bg-[#FC427B]" type="submit">
+          <div className="text-center">
+            <button id='submitBTN' className="p-4 h-[50px] w-[100px] bg-[#FC427B] text-white" type="submit">
               Sign Up
             </button>
             <Toaster />
           </div>
         </form>
-        
+
 
       </div>
     </div>
