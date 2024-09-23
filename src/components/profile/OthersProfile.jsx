@@ -5,6 +5,7 @@ import addition from "./addition.png";
 import folder from "./folder.png";
 import UserPost from "../userPost/UserPost";
 
+
 const OthersProfile = ({id}) => {
   const uid = id
   console.log("uid:"+uid);
@@ -134,7 +135,8 @@ const OthersProfile = ({id}) => {
         }`}
       >
         {pics.map((picObject, index) => (
-         <UserPost key={index} index={index} picObject={picObject}></UserPost>
+         <UserPost key={index} index={index} user={user} picObject={picObject}></UserPost>
+       
         ))}
       </div>
     

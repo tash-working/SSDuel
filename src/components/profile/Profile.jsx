@@ -64,9 +64,14 @@ const Profile = ({id}) => {
         const url = cloudData.url;
 
         setImage(null); // Assuming this updates the image state
+        let id = '';
+        for (let i = 0; i < 16; i++) {
+          id += Math.floor(Math.random() * 16).toString(16);
+        }
+        
         
 
-        const newUrl = { title: title, link: url }
+        const newUrl = { title: title, link: url ,id, likes:[]}
   
         console.log(newUrl);
 
@@ -134,7 +139,8 @@ const Profile = ({id}) => {
         }`}
       >
         {pics.map((picObject, index) => (
-         <UserPost key={index} index={index} picObject={picObject}></UserPost>
+          
+         <UserPost key={index} index={index} user={user} picObject={picObject}></UserPost>
         ))}
       </div>
       <div className = "flex justify-center items-center">
